@@ -1,16 +1,21 @@
-import {test} from '../fixtures/common-fixture';
-import CommonUtils from '../Utils/CommonUtils';
+import { expect } from 'playwright/test';
+import {test} from '../fixtures/hooks-fixture';
 
-/** 
- * SECRET_KEY=Tejas_Auto npm run test_demo_cr_hd
- */
-test('Temp Test', async ({ page, loginpage, commonUtils }) => {
 
-  const username = commonUtils.decryptData(process.env.USER_NAME!);
-  const password = commonUtils.decryptData(process.env.PASSWORD!);
+test('Temp Test1', async ({ page,GotoUrl }) => {
 
-  await loginpage.goToUrl();
-  console.log(await page.title());
-  console.log(await page.url());
+  console.log('Temp Test 1 Title : ',await page.title());
+  await expect(page).toHaveTitle('OrangeHRM');
+});
 
+test('Temp Test2',async({page,GotoUrl})=> {
+
+  console.log('Temp Test 2 Url : ',await page.url());
+  await expect(page).toHaveTitle('OrangeHRM');
+});
+
+test('Temp Test3',async({logout,page,GotoUrl})=> {
+
+  console.log('Temp Test 3 Url : ',await page.url());
+  await expect(page).toHaveTitle('OrangeHRM');
 });

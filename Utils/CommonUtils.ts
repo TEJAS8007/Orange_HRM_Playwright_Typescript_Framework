@@ -1,6 +1,6 @@
 import cryptojs from 'crypto-js';
 
-export default class CommonUtils {
+export  class CommonUtils {
 
     private secret_key: string;
     
