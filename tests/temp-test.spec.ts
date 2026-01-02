@@ -6,38 +6,36 @@ test('Temp Test1',
   {
     tag : ['@UI','@UAT'],
     annotation : {
-      type : 'Test Case Link',
-      description : 'Temp Test 1'
+      type : 'Test Case',
+      description : 'verifying Home Page Title'
     }
   }
   , async ({ page,GotoUrl }) => {
 
-  console.log('Temp Test 1 Title : ',await page.title());
-  await expect(page).toHaveTitle('OrangeHRM');
+    await test.step('Printing Home Page Title',async()=> {
+      console.log('Temp Test 1 Title : ',await page.title());
+    });
+
+    await test.step('Verifying Home Page Title',async()=> {
+      await expect(page).toHaveTitle('OrangeHRM');
+    });
+  
 });
 
 test('Temp Test2',
   {
     tag : ['@UI','@UAT'],
     annotation : {
-      type : 'Test Case Link',
-      description : 'Temp Test 2'
-    }
-  },async({page,GotoUrl})=> {
-
-  console.log('Temp Test 2 Url : ',await page.url());
-  await expect(page).toHaveTitle('OrangeHRM');
-});
-
-test('Temp Test3',
-  {
-    tag : ['@UI','@UAT'],
-    annotation : {
-      type : 'Test Case Link',
-      description : 'Temp Test 3'
+      type : 'Test Case',
+      description : 'verifying Home Page Url'
     }
   },async({logout,page,GotoUrl})=> {
 
-  console.log('Temp Test 3 Url : ',await page.url());
-  await expect(page).toHaveTitle('OrangeHRM');
+    await test.step('Verifying Url of HomePage',async()=> {
+      console.log('Temp Test 3 Url : ',await page.url());
+    });
+  
+    await test.step('Verifying home Page Title',async()=> {
+      await expect(page).toHaveTitle('OrangeHRM');
+    });
 });

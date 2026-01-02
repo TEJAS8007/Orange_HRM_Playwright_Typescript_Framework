@@ -6,3 +6,5 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/env-files/.env.demo/
+/env-files/.env.dev/
