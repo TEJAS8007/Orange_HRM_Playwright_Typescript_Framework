@@ -1,5 +1,5 @@
 import { expect } from 'playwright/test';
-import {test} from '../fixtures/hooks-fixture';
+import {test} from '../../fixtures/hooks-fixture';
 
 
 test('Temp Test1',

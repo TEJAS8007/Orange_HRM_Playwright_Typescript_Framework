@@ -1,5 +1,5 @@
-import {test,expect} from '../fixtures/hooks-fixture';
-import loginData from '../Data-files/login_Module_Data.json';
+import {test,expect} from '../../fixtures/hooks-fixture';
+import loginData from '../../Data-files/ui-data/login_Module_Data.json';
 
 test.use({
     storageState : {
@@ -8,7 +8,16 @@ test.use({
     }
 });
 
-test('verify that user cannot login with Invalid password',
+test.describe('Invalid Login Test',
+    {
+        tag:'@Invalid_Login',
+        annotation : {
+            type : 'Case',
+            description : 'User Cannot Login with Invalid Credentials..'
+        }
+    },()=>{
+
+    test('verify that user cannot login with Invalid password',
     {
         tag:['@UI','@UAT'],
         annotation : {
@@ -68,6 +77,9 @@ test('verifying user cannot login with invalid credentials',
 
 });
 
+});
+
+
 test('verifying username and password Boxes to be visible',
     {
         tag:['@UI','@UAT'],
@@ -89,5 +101,24 @@ test('verifying username and password Boxes to be visible',
           await expect(loginpage.LoginButton).toBeEnabled();
         });
     
+});
+
+test.skip('Verify that user can login with valid username and password',
+    {
+        tag:['@VISUAL','@UI'],
+        annotation : {
+            type : 'Test Case',
+            description : 'Verifying Succesfull Login with visual testing'
+        }
+    },async({GotoUrl,loginpage,commonUtils,leftnavigationpage})=>{
+
+        const username = commonUtils.decryptData(process.env.USER_NAME!);
+        const password = commonUtils.decryptData(process.env.PASSWORD!);
+
+        await loginpage.LoginIntoOrangeHRM(username,password);
+
+        await expect(leftnavigationpage.orangeHRMlogo).toHaveScreenshot('OrangeHRMBrandLogo.png');
+        await expect(leftnavigationpage.leftNavigationPanel).toHaveScreenshot('LeftNavigationPanel.png');
+
 });
 

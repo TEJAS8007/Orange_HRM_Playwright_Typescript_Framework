@@ -1,5 +1,5 @@
-import {test,expect} from '../fixtures/hooks-fixture';
-import pimData from '../Data-files/pim-module-data.json';
+import {test,expect} from '../../fixtures/hooks-fixture';
+import pimData from '../../Data-files/ui-data/pim-module-data.json';
 
 
 test('verify new Employee is created under PIM Module',
@@ -14,10 +14,12 @@ test('verify new Employee is created under PIM Module',
           await leftnavigationpage.openPIMModule();
         });
 
+
         await test.step('Adding Employee into PIM Module',async()=> {
           await pimpage.addEmployee(pimData.firstName,pimData.middleName,pimData.lastName);
         });
 
+        
         await test.step('Verying New Emplyee into PIM Module',async()=> {
           await expect(pimpage.newEmployeeHeading).toHaveText(pimData.newEmployeeName);
         });
