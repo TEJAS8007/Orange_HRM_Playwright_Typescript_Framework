@@ -1,4 +1,5 @@
 {
     "booking_path" : "Booking",
-    "auth_path" : "auth"
+    "auth_path" : "auth",
+    "object_path" : "objects"
 }

@@ -27,18 +27,12 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html',{open:'always'}]],
+  reporter: [['html',{open:'on-failure'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   expect : { timeout:400000} ,
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-    baseURL : process.env.API_BASE_URL,
-    extraHTTPHeaders : {
-      Accept : 'application/json',
-      'Content-Type' : 'application/json',
-      
-    },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     screenshot : 'only-on-failure',
@@ -52,8 +46,25 @@ export default defineConfig({
     testMatch: 'global-setup.ts'
   },
   {
-    name : 'apiTest',
-    testDir : './tests/api-tests'
+    name : 'apiTest-restfull-booker',
+    testDir : './tests/api-tests-restfull-booker',
+    use : {
+      baseURL : process.env.API_BASE_URL,
+      extraHTTPHeaders : {
+        Accept : 'application/json',
+        'Content-Type' : 'application/json'
+      }
+    }
+  },
+  {
+    name :'apiTestrestfullobjects',
+    testDir : './tests/api-tests-restfull-objects',
+    use : {
+      baseURL : process.env.API_BASE_URL2,
+      extraHTTPHeaders : {
+        'Content-Type' : 'application/json'
+      }
+    }
   },
   {
     name: 'chromium',

@@ -3,17 +3,6 @@ import {test,expect} from '../../fixtures/hooks-fixture';
 import apiPathData from '../../Data-files/api-data/api-path-data.json';
 import restData from '../../Data-files/api-data/restful-booker-module-data.json';
 
-// test('API Testing',async({request})=> {
-
-//     const response = await request.get('Booking');
-//     console.log(await response.json());
-// });
-
-// test('API Test2',async({request})=> {
-
-//     const response = await request.get('Booking/1');
-//     console.log(await response.json());
-// });
 let bookingID:number;
 
 test('Fetching user details using Get API call',
@@ -54,7 +43,7 @@ test('Verifying user is able to create new bookings',{
     console.log(createBookingResponse);
     expect(createBookingRequest.status()).toBe(200);
     expect(createBookingResponse.booking).toMatchObject(restData.create_booking);
-    
+
 });    
 
 test('Fetching user details with specific ID',{
@@ -98,7 +87,68 @@ test('Verifying user can update the existing booking',{
     const updateBookingResponse = await updateBookingRequest.json();
     expect(updateBookingResponse).toMatchObject(restData.update_booking);
     console.log(updateBookingResponse);
+
 });
 
+test('Verifying user can update partial data',{
+    tag : '@API',
+    annotation : {
+        type : 'Test Case',
+        description : 'Verifying user can update partial data using PATCH call'
+    }
+},async({request,commonApiUtils})=>{
+ 
+    const token = await commonApiUtils.createToken();
 
+    const updateRequest = await request.patch(`${apiPathData.booking_path}/${bookingID}`,{
+        headers : {
+            Cookie:`token=${token}`
+        },
+        data : restData.partial_update
+    });
+
+    expect(updateRequest.status()).toBe(200);
+    
+    const updateJsonResponse = await updateRequest.json();
+    expect(updateJsonResponse).not.toBeNull();
+    expect(updateJsonResponse).toMatchObject(restData.partial_update);
+    console.log(updateJsonResponse);
+
+});
+
+test('Verifying user can delete existing booking',{
+    tag : '@API',
+    annotation : {
+        type : 'Test Case',
+        description : 'Verifying user can delete exissting booking using DELETE call'
+    }
+},async({request,commonApiUtils})=> {
+
+    const token = await commonApiUtils.createToken();
+
+    const deleteRequest = await request.delete(`${apiPathData.booking_path}/${bookingID}`,{
+        headers : {
+            Cookie:`token=${token}`
+        }
+    });
+
+    expect(deleteRequest.status()).toBe(201);
+    expect(deleteRequest.statusText()).toBe('Created');
+
+});
+
+test('Verify user fetch booking after DELETE call',{
+    tag : '@API',
+    annotation : {
+        type : 'Test Case',
+        description : 'Verify that user get Booking details after using DELETE call over booking'
+    }
+},async({request})=> {
+
+    const bookingRequest = await request.get(`${apiPathData.booking_path}/${bookingID}`);
+    
+    expect(bookingRequest.status()).toBe(404);
+    expect(bookingRequest.statusText()).toBe('Not Found');
+
+});
 
