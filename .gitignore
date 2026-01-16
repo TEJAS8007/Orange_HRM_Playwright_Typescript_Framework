@@ -1,10 +1,11 @@
-
-# Playwright
+# Node / Playwright
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
-/env-files/.env.demo/
-/env-files/.env.dev/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
+
+# Env files
+env-files/
+*.env

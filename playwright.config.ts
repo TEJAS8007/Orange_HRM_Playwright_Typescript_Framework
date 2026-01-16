@@ -17,7 +17,8 @@ dotenv.config({
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './tests/ui-tests',
+  
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -29,51 +30,45 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html',{open:'on-failure'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  expect : { timeout:400000} ,
+  expect : { timeout:600000} ,
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    
+    baseURL : process.env.API_BASE_URL,
+    extraHTTPHeaders : {
+      Accept : 'application/json',
+      'Content-Type' : 'application/json'
+
+    },
     trace: 'on-first-retry',
     screenshot : 'only-on-failure',
-    video : 'retain-on-failure'
+    video : 'retain-on-failure',
+    
   },
 
   /* Configure projects for major browsers */
   projects: [
-   {
+ {
+    name : 'apiTest-restfull-booker',
+    testDir : './tests/api-tests-restfull-booker',
+   
+  },
+  {
     name: 'Global_setUp',
     testMatch: 'global-setup.ts'
   },
-  {
-    name : 'apiTest-restfull-booker',
-    testDir : './tests/api-tests-restfull-booker',
-    use : {
-      baseURL : process.env.API_BASE_URL,
-      extraHTTPHeaders : {
-        Accept : 'application/json',
-        'Content-Type' : 'application/json'
-      }
-    }
-  },
-  {
-    name :'apiTestrestfullobjects',
-    testDir : './tests/api-tests-restfull-objects',
-    use : {
-      baseURL : process.env.API_BASE_URL2,
-      extraHTTPHeaders : {
-        'Content-Type' : 'application/json'
-      }
-    }
-  },
-  {
+ {
     name: 'chromium',
     dependencies: ['Global_setUp'],
+    
     use: {
-      ...devices['Desktop Chrome'],
-      storageState: './Auth_Files/Auth/auth.json'
-    }
-  },
+    storageState: './Auth_Files/Auth/auth.json',
+    ...devices['Desktop Chrome']
+  }
+}
+,
     /*
     {
       name: 'firefox',

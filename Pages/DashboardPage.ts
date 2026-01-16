@@ -8,7 +8,7 @@ export class DashboardPage {
     constructor(page:Page) {
         this.page=page;
  
-        this.dashBoardTitleText = page.getByRole('heading', { name: 'Dashboard' });
+        this.dashBoardTitleText = page.locator('h6.oxd-text--h6.oxd-topbar-header-breadcrumb-module');
     }
 
 

@@ -74,7 +74,7 @@ test('Verifying user can update the existing booking',{
 },async({request,commonApiUtils})=> {
 
     const token = await commonApiUtils.createToken();
-    
+    console.log('TOKEN : ',token);
     const updateBookingRequest = await request.put(`${apiPathData.booking_path}/${bookingID}`,{
         headers : {
             Cookie:`token=${token}`
@@ -99,7 +99,7 @@ test('Verifying user can update partial data',{
 },async({request,commonApiUtils})=>{
  
     const token = await commonApiUtils.createToken();
-
+  
     const updateRequest = await request.patch(`${apiPathData.booking_path}/${bookingID}`,{
         headers : {
             Cookie:`token=${token}`

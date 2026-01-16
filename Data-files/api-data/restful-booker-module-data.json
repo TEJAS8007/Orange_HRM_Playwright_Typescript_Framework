@@ -15,8 +15,8 @@
     "additionalneeds" : "Breakfast"
 },
    "update_booking" : {
-    "firstname" : "Steve",
-    "lastname" : "Rogers",
+    "firstname" : "steven",
+    "lastname" : "Smith",
     "totalprice" : 1500,
     "depositpaid" : true,
     "bookingdates" : {

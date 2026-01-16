@@ -36,5 +36,5 @@ export  class CommonUtils {
     public decryptData(encData:string) {
         const decryptedData = cryptojs.AES.decrypt(encData, this.secret_key).toString(cryptojs.enc.Utf8);
         return decryptedData;
-    }
+    }   
 }
