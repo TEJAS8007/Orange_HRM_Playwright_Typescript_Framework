@@ -1,3 +1,71 @@
+# 🚀 Playwright UI + API Automation Framework (TypeScript)
+
+This repository contains an end-to-end automation framework built using **Playwright**, supporting both **UI** and **API** test automation in a unified codebase.  
+Designed using modern testing patterns such as **Page Object Model (POM)**, **Fixtures**, **Test Tags**, **Test Metadata**, and **Data-Driven Testing**.
+
+---
+
+## 🧰 **Tech Stack**
+
+| Layer | Tools |
+|-------|-------|
+| Language | TypeScript |
+| Framework | Playwright |
+| UI Testing | Playwright (Chromium / WebKit / Firefox) |
+| API Testing | Playwright Request API |
+| Design Pattern | POM + Fixtures |
+| Reporting | Playwright HTML Report |
+| Test Runner | Playwright Test Runner |
+| Data Storage | JSON Files / ENV |
+| Version Control | Git + GitHub |
+| CI/CD (Optional) | Jenkins / GitHub Actions |
+
+---
+
+## 🌟 **Features Implemented**
+
+✔ UI Test Automation  
+✔ API Test Automation  
+✔ Global Setup (Auto Login + StorageState)  
+✔ Page Object Model (Reusable Locators + Actions)  
+✔ Fixtures for POM + Request Context  
+✔ Custom Tags (`@UI`, `@API`, `@SANITY` etc.)  
+✔ Test Metadata + Annotation  
+✔ Data-Driven Tests via JSON  
+✔ Environment Config with `.env`  
+✔ Auth Session Reuse using `storageState`  
+✔ HTML Reporting + Timeline  
+✔ Support for Serial Tests (CRUD API)  
+
+---
+
+## 📁 **Project Structure**
+
+📦 playwright-framework
+┣ 📂 tests
+┃ ┣ 📂 ui-tests
+┃ ┣ 📂 api-tests
+┣ 📂 pages
+┃ ┗ product.page.ts
+┣ 📂 fixtures
+┃ ┗ pom.fixture.ts
+┣ 📂 data-files
+┃ ┣ ui-data.json
+┃ ┣ api-data.json
+┣ 📂 env-files
+┣ 📂 Auth-files
+┣ global-setup.ts
+┣ playwright.config.ts
+┣ package.json
+┣ README.md
+
+
+---
+
+## 🧪 **Running Tests**
+
+### ▶ Run all UI tests
+```sh
 npx playwright test --grep @UI
 ▶ Run all API tests
 npx playwright test --grep @API
